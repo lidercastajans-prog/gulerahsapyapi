@@ -31,7 +31,7 @@ export default async function BlogPage() {
             <p className="text-xs uppercase tracking-[0.3em] text-accent">
               Blog
             </p>
-            <h1 className="mt-4 font-serif text-5xl md:text-7xl font-medium leading-[1.05] tracking-tight max-w-4xl">
+            <h1 className="mt-4 font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight max-w-4xl">
               Atölyeden notlar, sahadan deneyimler.
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-foreground/75 leading-relaxed">
@@ -46,31 +46,31 @@ export default async function BlogPage() {
             <div className="mx-auto max-w-7xl px-6 lg:px-10">
               <Link
                 href={`/blog/${featured.slug}`}
-                className="group grid gap-8 lg:grid-cols-2 lg:gap-12 items-center"
+                className="group grid gap-6 md:gap-8 lg:grid-cols-12 lg:gap-12 items-center"
               >
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
+                <div className="lg:col-span-7 relative aspect-[16/10] rounded-2xl overflow-hidden">
                   <Image
                     src={featured.image}
                     alt={featured.title}
                     fill
                     priority
-                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    sizes="(min-width: 1024px) 58vw, 100vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
-                <div>
+                <div className="lg:col-span-5">
                   <div className="flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-accent">
                     <span>{featured.category}</span>
                     <span className="w-1 h-1 rounded-full bg-accent" />
                     <span>{formatDate(featured.date)}</span>
                   </div>
-                  <h2 className="mt-4 font-serif text-3xl md:text-5xl font-medium leading-tight tracking-tight group-hover:text-accent transition-colors">
+                  <h2 className="mt-4 font-serif text-3xl md:text-4xl lg:text-5xl font-medium leading-tight tracking-tight group-hover:text-accent transition-colors">
                     {featured.title}
                   </h2>
-                  <p className="mt-5 text-lg text-foreground/75 leading-relaxed">
+                  <p className="mt-4 text-base md:text-lg text-foreground/75 leading-relaxed">
                     {featured.excerpt}
                   </p>
-                  <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-accent">
+                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-accent">
                     Yazıyı oku
                     <span aria-hidden>→</span>
                   </span>
@@ -99,19 +99,19 @@ export default async function BlogPage() {
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                     </div>
-                    <div className="p-6 lg:p-8">
+                    <div className="flex flex-col flex-1 p-6 lg:p-7">
                       <div className="flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-muted">
                         <span>{post.category}</span>
                         <span className="w-1 h-1 rounded-full bg-muted" />
                         <span>{formatDate(post.date)}</span>
                       </div>
-                      <h3 className="mt-3 font-serif text-2xl md:text-3xl font-semibold leading-tight group-hover:text-accent transition-colors">
+                      <h3 className="mt-3 font-serif text-xl md:text-2xl font-semibold leading-tight group-hover:text-accent transition-colors">
                         {post.title}
                       </h3>
-                      <p className="mt-3 text-base text-foreground/70 leading-relaxed">
+                      <p className="mt-3 text-sm md:text-base text-foreground/75 leading-relaxed line-clamp-3">
                         {post.excerpt}
                       </p>
-                      <span className="mt-5 inline-flex items-center gap-2 text-sm text-muted">
+                      <span className="mt-auto pt-5 text-xs uppercase tracking-[0.15em] text-muted">
                         {post.readTime}
                       </span>
                     </div>

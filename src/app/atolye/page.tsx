@@ -37,7 +37,7 @@ const teamRoles = [
     role: "Mimari Tasarım Sorumlusu",
     tenure: "8+ yıl",
     summary:
-      "Müşteri brief'ini plan ve 3D görsele dönüştüren, mevzuat süreçlerini takip eden tasarım ekibi.",
+      "Müşteri talebini plan ve 3D görsele dönüştüren, mevzuat süreçlerini takip eden tasarım ekibi.",
   },
   {
     role: "Montaj Ekip Lideri",
@@ -49,7 +49,7 @@ const teamRoles = [
     role: "Müşteri İlişkileri",
     tenure: "5+ yıl",
     summary:
-      "Brief alımı, teklif takibi, teslim sonrası bakım iletişimi — müşterinin ses tonu.",
+      "Talep alımı, teklif takibi, teslim sonrası bakım iletişimi — müşterinin ses tonu.",
   },
 ];
 
@@ -78,7 +78,7 @@ export default function AtolyePage() {
               <p className="text-xs uppercase tracking-[0.3em] text-accent">
                 Atölye & Ekip
               </p>
-              <h1 className="mt-4 font-serif text-5xl md:text-7xl font-medium leading-[1.05] tracking-tight">
+              <h1 className="mt-4 font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight">
                 Adrasan'daki atölyemizden, sizin sahanıza.
               </h1>
               <p className="mt-6 max-w-2xl text-lg text-foreground/75 leading-relaxed">
@@ -157,7 +157,7 @@ export default function AtolyePage() {
                 Sahada bir araya gelen roller.
               </h2>
               <p className="mt-5 text-lg text-foreground/75 leading-relaxed">
-                Brief alımından teslim sonrası bakıma kadar her aşamada
+                Talep alımından teslim sonrası bakıma kadar her aşamada
                 muhatabınız olan ekip.
               </p>
             </div>

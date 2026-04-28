@@ -9,7 +9,7 @@ import { site, whatsappLink } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Yapı Süreci",
   description:
-    "Brief'ten teslime: 5 adımlı anahtar teslim ahşap yapı sürecimiz. Her aşamada neye dikkat ediyor, sizden ne bekliyoruz?",
+    "İlk görüşmeden teslime: 5 adımlı anahtar teslim ahşap yapı sürecimiz. Her aşamada neye dikkat ediyor, sizden ne bekliyoruz?",
   alternates: { canonical: "/surec" },
 };
 
@@ -24,8 +24,8 @@ export default async function SurecPage() {
             <p className="text-xs uppercase tracking-[0.3em] text-accent">
               Yapı Süreci
             </p>
-            <h1 className="mt-4 font-serif text-5xl md:text-7xl font-medium leading-[1.05] tracking-tight max-w-4xl">
-              Brief'ten teslime, beş adımda.
+            <h1 className="mt-4 font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight max-w-4xl">
+              İlk görüşmeden teslime, beş adımda.
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-foreground/75 leading-relaxed">
               Anahtar teslim çalışıyoruz — yani tasarım, üretim, montaj ve
@@ -114,7 +114,7 @@ export default async function SurecPage() {
         <section className="py-20 lg:py-28">
           <div className="mx-auto max-w-4xl px-6 lg:px-10 text-center">
             <h2 className="font-serif text-4xl md:text-5xl font-medium leading-tight tracking-tight">
-              Süreç netse, sıra brief'e geldi.
+              Süreç netse, sıra ilk görüşmeye geldi.
             </h2>
             <p className="mt-5 text-lg text-foreground/80 leading-relaxed max-w-2xl mx-auto">
               Bir telefon ya da WhatsApp mesajı yeterli. Aynı gün içinde

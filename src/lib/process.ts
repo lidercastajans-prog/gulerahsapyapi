@@ -10,7 +10,7 @@ export type ProcessStep = {
 export const processSteps: ProcessStep[] = [
   {
     number: "01",
-    title: "Brief & Keşif",
+    title: "Ön Görüşme & Keşif",
     duration: "1-2 hafta",
     description:
       "İhtiyacınızı dinleriz, mümkünse araziyi yerinde gezeriz. Kullanım amacı, kişi sayısı, mevsimsellik ve mevzuat durumu netleşir.",
@@ -32,7 +32,7 @@ export const processSteps: ProcessStep[] = [
     title: "Tasarım & Net Teklif",
     duration: "2-3 hafta",
     description:
-      "Brief üzerinden plan, kesit ve 3D görsel hazırlarız. Donanım listesi, opsiyonlar ve net teklifle birlikte sunarız.",
+      "İlk görüşmedeki notlardan hareketle plan, kesit ve 3D görsel hazırlarız. Donanım listesi, opsiyonlar ve net teklifle birlikte sunarız.",
     weCheck: [
       "Mimari plan optimizasyonu",
       "Konstrüksiyon detay seçimleri",

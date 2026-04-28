@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SocialStrip from "@/components/SocialStrip";
 import {
   featured,
   images,
@@ -15,6 +16,7 @@ import {
   getFeaturedTestimonials,
   getGalleryImages,
 } from "@/lib/fetchers";
+import { instagramPosts, socialLinks } from "@/lib/social";
 import type { Testimonial } from "@/lib/testimonials";
 import type { GalleryImage } from "@/lib/fetchers";
 import ContactForm from "@/components/ContactForm";
@@ -45,6 +47,7 @@ export default async function Home() {
         <Stats />
         <Testimonials items={featuredTestimonials} />
         <Gallery images={galleryImages} />
+        <SocialStrip posts={instagramPosts} links={socialLinks} />
         <About />
         <Contact modelOptions={modelOptions} />
       </main>
@@ -72,7 +75,7 @@ function Hero() {
         <p className="text-xs uppercase tracking-[0.3em] text-white/80 mb-5">
           {site.region} · {site.experienceYears}+ Yıllık Deneyim
         </p>
-        <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-medium leading-[1.05] tracking-tight max-w-5xl">
+        <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-medium leading-[1.05] tracking-tight max-w-5xl">
           Doğanın sıcaklığı, ahşabın zarafeti — anahtar teslim.
         </h1>
         <p className="mt-8 max-w-xl text-lg text-white/85 leading-relaxed">

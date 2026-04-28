@@ -38,7 +38,7 @@ function PageHero() {
         <p className="text-xs uppercase tracking-[0.3em] text-accent">
           Model Kataloğu
         </p>
-        <h1 className="mt-4 font-serif text-5xl md:text-7xl font-medium leading-[1.05] tracking-tight max-w-4xl">
+        <h1 className="mt-4 font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight max-w-4xl">
           İhtiyacınıza uyan modeli seçin, gerisini bize bırakın.
         </h1>
         <p className="mt-6 max-w-2xl text-lg text-foreground/75 leading-relaxed">

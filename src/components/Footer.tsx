@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { footerSecondary, nav, site } from "@/lib/site";
+import { socialLinks } from "@/lib/social";
 
 export default function Footer() {
   return (
@@ -99,6 +100,22 @@ export default function Footer() {
               </li>
             </ul>
           </address>
+          <div className="mt-6 flex items-center gap-3">
+            {socialLinks.map((link) => (
+              <a
+                key={link.platform}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${link.label} sayfamız`}
+                className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-background/20 text-background/70 hover:text-background hover:border-background/50 transition-colors"
+              >
+                <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current">
+                  <path d={link.iconPath} />
+                </svg>
+              </a>
+            ))}
+          </div>
         </section>
       </div>
 

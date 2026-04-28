@@ -1,5 +1,5 @@
 import { createClient } from "next-sanity";
-import createImageUrlBuilder from "@sanity/image-url";
+import { createImageUrlBuilder } from "@sanity/image-url";
 import { apiVersion, dataset, isSanityConfigured, projectId } from "./env";
 
 type SanityImageSource = Parameters<

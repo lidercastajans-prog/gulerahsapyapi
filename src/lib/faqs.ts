@@ -16,7 +16,7 @@ export const faqGroups: FaqGroup[] = [
     items: [
       {
         q: "Tiny house için inşaat ruhsatı gerekir mi?",
-        a: "Tekerlekli şasi üzerine kurulan tiny house'lar bazı bölgelerde 'taşınabilir yapı' kapsamında değerlendirilerek ruhsat dışı kullanılabilir. Sabit temel üzerine kurulan modellerde ise yapı ruhsatı genelde gereklidir. Arazinin imar durumuna göre değişir; brief sürecinde belediye ile birlikte takip ediyoruz.",
+        a: "Tekerlekli şasi üzerine kurulan tiny house'lar bazı bölgelerde 'taşınabilir yapı' kapsamında değerlendirilerek ruhsat dışı kullanılabilir. Sabit temel üzerine kurulan modellerde ise yapı ruhsatı genelde gereklidir. Arazinin imar durumuna göre değişir; ön görüşme sürecinde belediye ile birlikte takip ediyoruz.",
       },
       {
         q: "Bungalov ve ahşap evler için imar şartı nedir?",
@@ -32,7 +32,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "Yapı kayıt belgesi alabiliyor muyum?",
-        a: "Mevzuat değişkenliği nedeniyle bu konu projeden projeye farklılık gösterir. Brief aşamasında sizin bölgenizdeki güncel mevzuatı birlikte değerlendiriyor ve ona göre ilerliyoruz.",
+        a: "Mevzuat değişkenliği nedeniyle bu konu projeden projeye farklılık gösterir. Ön görüşme aşamasında sizin bölgenizdeki güncel mevzuatı birlikte değerlendiriyor ve ona göre ilerliyoruz.",
       },
     ],
   },
@@ -94,7 +94,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "Teklif alırken ücret ödüyor muyum?",
-        a: "Hayır. Brief görüşmesi, plan önerisi ve net teklif tamamen ücretsiz. Detaylı 3D görselleştirme ve mimari proje çizimi opsiyonel ve ücretlidir; teklifte ayrıca belirtilir.",
+        a: "Hayır. İlk görüşme, plan önerisi ve net teklif tamamen ücretsiz. Detaylı 3D görselleştirme ve mimari proje çizimi opsiyonel ve ücretlidir; teklifte ayrıca belirtilir.",
       },
       {
         q: "Banka kredisi ya da finansman desteğiniz var mı?",

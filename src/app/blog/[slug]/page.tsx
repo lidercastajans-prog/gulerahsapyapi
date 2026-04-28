@@ -88,14 +88,14 @@ export default async function PostPage({ params }: Props) {
             </div>
           </header>
 
-          <div className="mx-auto max-w-5xl px-6">
-            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden">
+          <div className="mx-auto max-w-3xl px-6">
+            <div className="relative aspect-[16/10] rounded-2xl overflow-hidden">
               <Image
                 src={post.image}
                 alt={post.title}
                 fill
                 priority
-                sizes="(min-width: 1024px) 1024px, 100vw"
+                sizes="(min-width: 1024px) 768px, 100vw"
                 className="object-cover"
               />
             </div>

@@ -131,7 +131,7 @@ function Hero({
           <p className="text-xs uppercase tracking-[0.3em] text-accent">
             {m.category.title}
           </p>
-          <h1 className="mt-4 font-serif text-5xl md:text-7xl font-medium leading-[1.05] tracking-tight">
+          <h1 className="mt-4 font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight">
             {m.name}
           </h1>
           <p className="mt-5 text-xl text-foreground/75 leading-relaxed max-w-2xl">
