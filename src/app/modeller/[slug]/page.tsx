@@ -195,7 +195,7 @@ function Description({
   model: Model & { category: ModelCategory };
 }) {
   return (
-    <section className="py-16 lg:py-20 border-y border-border bg-surface">
+    <section className="py-12 lg:py-20 border-y border-border bg-surface">
       <div className="mx-auto max-w-3xl px-6">
         <h2 className="font-serif text-3xl md:text-4xl font-medium tracking-tight">
           Bu model hakkında
@@ -212,7 +212,7 @@ function Description({
 
 function Features({ features }: { features: readonly string[] }) {
   return (
-    <section className="py-16 lg:py-20">
+    <section className="py-12 lg:py-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <h2 className="font-serif text-3xl md:text-4xl font-medium tracking-tight max-w-xl">
           Standart Özellikler
@@ -245,7 +245,7 @@ function IncludesAndOptions({
   options: readonly string[];
 }) {
   return (
-    <section className="py-16 lg:py-20 border-y border-border">
+    <section className="py-12 lg:py-20 border-y border-border">
       <div className="mx-auto max-w-7xl px-6 lg:px-10 grid gap-10 lg:grid-cols-2 lg:gap-16">
         <Pillar
           eyebrow="Standart pakette"
@@ -328,7 +328,7 @@ function Pillar({
 
 function CTA({ modelName, wppText }: { modelName: string; wppText: string }) {
   return (
-    <section className="py-16 lg:py-20">
+    <section className="py-12 lg:py-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="rounded-3xl bg-accent text-white p-10 lg:p-16 grid gap-8 lg:grid-cols-12 lg:gap-12 items-center">
           <div className="lg:col-span-7">
@@ -378,7 +378,7 @@ function Related({
   }[];
 }) {
   return (
-    <section className="py-16 lg:py-24 border-t border-border bg-surface">
+    <section className="py-12 lg:py-24 border-t border-border bg-surface">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>

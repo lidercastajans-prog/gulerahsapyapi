@@ -25,7 +25,7 @@ export default async function ReferanslarPage() {
     <>
       <Header />
       <main id="main" className="flex flex-col">
-        <section className="pt-20 pb-12 lg:pt-28 border-b border-border">
+        <section className="pt-14 pb-10 lg:pt-28 lg:pb-12 border-b border-border">
           <div className="mx-auto max-w-7xl px-6 lg:px-10">
             <p className="text-xs uppercase tracking-[0.3em] text-accent">
               Referanslar
@@ -41,7 +41,7 @@ export default async function ReferanslarPage() {
           </div>
         </section>
 
-        <section className="py-16 lg:py-24">
+        <section className="py-12 lg:py-24">
           <div className="mx-auto max-w-7xl px-6 lg:px-10">
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {testimonials.map((t) => (
@@ -51,7 +51,7 @@ export default async function ReferanslarPage() {
           </div>
         </section>
 
-        <section className="py-16 lg:py-24 bg-foreground text-background">
+        <section className="py-12 lg:py-24 bg-foreground text-background">
           <div className="mx-auto max-w-4xl px-6 lg:px-10 text-center">
             <h2 className="font-serif text-4xl md:text-5xl font-medium leading-tight tracking-tight text-background">
               Sıradaki referans sizin olabilir.

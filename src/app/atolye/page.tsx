@@ -72,7 +72,7 @@ export default function AtolyePage() {
     <>
       <Header />
       <main id="main" className="flex flex-col">
-        <section className="pt-20 pb-12 lg:pt-28 lg:pb-20 border-b border-border">
+        <section className="pt-14 pb-10 lg:pt-28 lg:pb-20 border-b border-border">
           <div className="mx-auto max-w-7xl px-6 lg:px-10 grid gap-10 lg:grid-cols-12 lg:gap-16 items-end">
             <div className="lg:col-span-7">
               <p className="text-xs uppercase tracking-[0.3em] text-accent">
@@ -100,7 +100,7 @@ export default function AtolyePage() {
           </div>
         </section>
 
-        <section className="py-20 lg:py-28">
+        <section className="py-14 lg:py-28">
           <div className="mx-auto max-w-7xl px-6 lg:px-10 grid gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5">
               <p className="text-xs uppercase tracking-[0.3em] text-accent">
@@ -147,7 +147,7 @@ export default function AtolyePage() {
           </div>
         </section>
 
-        <section className="py-20 lg:py-28">
+        <section className="py-14 lg:py-28">
           <div className="mx-auto max-w-7xl px-6 lg:px-10">
             <div className="max-w-3xl">
               <p className="text-xs uppercase tracking-[0.3em] text-accent">
@@ -184,7 +184,7 @@ export default function AtolyePage() {
           </div>
         </section>
 
-        <section className="py-20 lg:py-28 bg-surface border-y border-border">
+        <section className="py-14 lg:py-28 bg-surface border-y border-border">
           <div className="mx-auto max-w-7xl px-6 lg:px-10">
             <div className="max-w-3xl">
               <p className="text-xs uppercase tracking-[0.3em] text-accent">
@@ -213,7 +213,7 @@ export default function AtolyePage() {
           </div>
         </section>
 
-        <section className="py-20 lg:py-28">
+        <section className="py-14 lg:py-28">
           <div className="mx-auto max-w-4xl px-6 lg:px-10 text-center">
             <p className="text-xs uppercase tracking-[0.3em] text-accent">
               Bir sonraki adım

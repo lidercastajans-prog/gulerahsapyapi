@@ -104,7 +104,7 @@ function Hero() {
 
 function FeaturedProjects() {
   return (
-    <section id="projeler" className="py-24 lg:py-32">
+    <section id="projeler" className="py-16 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <SectionHeader
           eyebrow="Öne Çıkan Projeler"
@@ -142,7 +142,7 @@ function FeaturedProjects() {
 
 function Philosophy() {
   return (
-    <section id="hakkimizda" className="scroll-mt-24 py-24 lg:py-32 bg-surface border-y border-border">
+    <section id="hakkimizda" className="scroll-mt-24 py-16 lg:py-32 bg-surface border-y border-border">
       <div className="mx-auto max-w-7xl px-6 lg:px-10 grid gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-5">
           <p className="text-xs uppercase tracking-[0.3em] text-accent">
@@ -173,7 +173,7 @@ function Philosophy() {
 
 function Services() {
   return (
-    <section id="hizmetler" className="py-24 lg:py-32">
+    <section id="hizmetler" className="py-16 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <SectionHeader
           eyebrow="Hizmetlerimiz"
@@ -199,7 +199,7 @@ function Services() {
 
 function Region() {
   return (
-    <section className="relative py-24 lg:py-32 overflow-hidden">
+    <section className="relative py-16 lg:py-32 overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 lg:px-10 grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
         <div className="relative aspect-[4/5] lg:aspect-[4/5] rounded-2xl overflow-hidden">
           <Image
@@ -261,7 +261,7 @@ function Stats() {
 function Testimonials({ items }: { items: Testimonial[] }) {
   if (items.length === 0) return null;
   return (
-    <section className="py-24 lg:py-32 bg-surface border-y border-border">
+    <section className="py-16 lg:py-32 bg-surface border-y border-border">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-2xl">
@@ -320,7 +320,7 @@ function Testimonials({ items }: { items: Testimonial[] }) {
 
 function Gallery({ images }: { images: GalleryImage[] }) {
   return (
-    <section id="galeri" className="scroll-mt-24 py-24 lg:py-32">
+    <section id="galeri" className="scroll-mt-24 py-16 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <SectionHeader
           eyebrow="Galeri"
@@ -346,7 +346,7 @@ function Gallery({ images }: { images: GalleryImage[] }) {
 
 function About() {
   return (
-    <section className="py-24 lg:py-32 bg-surface border-y border-border">
+    <section className="py-16 lg:py-32 bg-surface border-y border-border">
       <div className="mx-auto max-w-7xl px-6 lg:px-10 grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
         <div className="order-2 lg:order-1">
           <p className="text-xs uppercase tracking-[0.3em] text-accent">
@@ -394,7 +394,7 @@ type ModelOption = { slug: string; name: string; area: string; layout: string };
 
 function Contact({ modelOptions }: { modelOptions: ModelOption[] }) {
   return (
-    <section id="iletisim" className="scroll-mt-24 py-24 lg:py-32">
+    <section id="iletisim" className="scroll-mt-24 py-16 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-3xl">
           <p className="text-xs uppercase tracking-[0.3em] text-accent">

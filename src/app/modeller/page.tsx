@@ -74,7 +74,7 @@ function CategorySection({ category }: { category: ModelCategory }) {
   return (
     <section
       id={category.slug}
-      className="py-20 lg:py-28 border-b border-border last:border-b-0 scroll-mt-36"
+      className="py-14 lg:py-28 border-b border-border last:border-b-0 scroll-mt-36"
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-3xl">
@@ -167,7 +167,7 @@ function Spec({ label, value }: { label: string; value: string }) {
 
 function CTA() {
   return (
-    <section className="py-20 lg:py-28 bg-foreground text-background">
+    <section className="py-14 lg:py-28 bg-foreground text-background">
       <div className="mx-auto max-w-4xl px-6 lg:px-10 text-center">
         <h2 className="font-serif text-4xl md:text-5xl font-medium leading-tight tracking-tight text-background">
           Modeller üzerinde özelleştirme yapıyoruz.

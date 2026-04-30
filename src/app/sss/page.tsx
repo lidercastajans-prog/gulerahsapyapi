@@ -34,7 +34,7 @@ export default async function SssPage() {
       <Header />
       <JsonLd data={faqPageSchema} />
       <main id="main" className="flex flex-col">
-        <section className="pt-20 pb-12 lg:pt-28 border-b border-border">
+        <section className="pt-14 pb-10 lg:pt-28 lg:pb-12 border-b border-border">
           <div className="mx-auto max-w-7xl px-6 lg:px-10">
             <p className="text-xs uppercase tracking-[0.3em] text-accent">
               Sıkça Sorulanlar
@@ -50,7 +50,7 @@ export default async function SssPage() {
           </div>
         </section>
 
-        <section className="py-16 lg:py-20">
+        <section className="py-12 lg:py-20">
           <div className="mx-auto max-w-5xl px-6 lg:px-10">
             <nav aria-label="Konular" className="mb-12">
               <ul className="flex flex-wrap gap-2">
@@ -109,7 +109,7 @@ export default async function SssPage() {
           </div>
         </section>
 
-        <section className="py-20 lg:py-28 bg-foreground text-background">
+        <section className="py-14 lg:py-28 bg-foreground text-background">
           <div className="mx-auto max-w-4xl px-6 lg:px-10 text-center">
             <h2 className="font-serif text-4xl md:text-5xl font-medium leading-tight tracking-tight text-background">
               Aradığınız cevap yok mu?

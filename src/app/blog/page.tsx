@@ -27,7 +27,7 @@ export default async function BlogPage() {
       <Header />
       <main id="main" className="flex flex-col">
         {/* Hero Header */}
-        <section className="pt-20 pb-12 lg:pt-28 border-b border-border">
+        <section className="pt-14 pb-10 lg:pt-28 lg:pb-12 border-b border-border">
           <div className="mx-auto max-w-7xl px-6 lg:px-10">
             <p className="text-xs uppercase tracking-[0.3em] text-accent">
               Blog
