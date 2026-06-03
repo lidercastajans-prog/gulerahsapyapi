@@ -44,12 +44,10 @@ export const footerSecondary = [
   { label: "Ahşap Rehberi", href: "/rehber" },
 ] as const;
 
-const wp = "https://i0.wp.com/gulerahsapyapi.com/wp-content/uploads";
-
 export const images = {
-  hero: `${wp}/2026/04/WhatsApp-Image-2026-03-27-at-19.39.13-4-1024x682.jpeg?ssl=1`,
-  about: `${wp}/2026/04/WhatsApp-Image-2026-04-08-at-18.03.10adsads-1-1024x768.jpeg?ssl=1`,
-  region: `${wp}/2026/04/WhatsApp-Image-2026-04-11-at-23.26.11-1024x576.jpeg?ssl=1`,
+  hero: "/hero.png",
+  about: "/bungalow.png",
+  region: "/tiny-house.png",
 };
 
 export const featured = [
@@ -57,19 +55,19 @@ export const featured = [
     title: "Adrasan Sahil Bungalov",
     summary:
       "Doğal ahşap dokulu, denize bakan modern bungalov. Geniş veranda ve özel pergola uygulaması.",
-    src: `${wp}/2026/04/WhatsApp-Image-2026-04-08-at-18.03.10adsads-1-1024x768.jpeg?ssl=1`,
+    src: "/bungalow.png",
   },
   {
     title: "Orman İçi Ahşap Villa",
     summary:
       "İki katlı, kalın masif ahşap konstrüksiyonlu, doğa ile bütünleşen butik villa.",
-    src: `${wp}/2026/04/WhatsApp-Image-2026-04-08-at-18.03.18-1-1024x1024.jpeg?ssl=1`,
+    src: "/tiny-house.png",
   },
   {
     title: "Bahçe Pergolası ve Teras",
     summary:
       "Açık hava yaşamı için tasarlanmış, hava şartlarına dayanıklı emprenye edilmiş pergola.",
-    src: `${wp}/2026/04/WhatsApp-Image-2026-04-11-at-23.26.11-1024x576.jpeg?ssl=1`,
+    src: "/hero.png",
   },
 ] as const;
 
@@ -104,12 +102,13 @@ export const stats = [
 ];
 
 export const gallery = [
-  `${wp}/2026/04/WhatsApp-Image-2026-04-08-at-18.03.17sss-1-1024x768.jpeg?ssl=1`,
-  `${wp}/2026/04/WhatsApp-Image-2026-04-08-at-18.03.18-1-1024x1024.jpeg?ssl=1`,
-  `${wp}/2026/04/WhatsApp-Image-2026-04-08-at-18.03.20asdads-1-1024x768.jpeg?ssl=1`,
-  `${wp}/2026/04/WhatsApp-Image-2026-04-08-at-18.03.25-1-1024x682.jpeg?ssl=1`,
-  `${wp}/2026/04/WhatsApp-Image-2026-04-11-at-23.26.08-1024x576.jpeg?ssl=1`,
-  `${wp}/2026/04/WhatsApp-Image-2026-04-11-at-23.26.12-1024x576.jpeg?ssl=1`,
-  `${wp}/2026/04/WhatsApp-Image-2026-04-11-at-23.26.13-1024x576.jpeg?ssl=1`,
-  `${wp}/2026/04/WhatsApp-Image-2026-04-11-at-23.26.15-1-1024x576.jpeg?ssl=1`,
+  "/hero.png",
+  "/bungalow.png",
+  "/tiny-house.png",
+  "/hero.png",
+  "/bungalow.png",
+  "/tiny-house.png",
+  "/hero.png",
+  "/bungalow.png",
 ];
+

@@ -46,7 +46,14 @@ export async function getCategories(): Promise<ModelCategory[]> {
     "category",
   ]);
   if (remote && remote.length > 0) return remote;
-  return fallbackCategories;
+  return fallbackCategories.map((c) => ({
+    ...c,
+    models: c.models.map((m) => ({
+      ...m,
+      image: "/bungalow.png",
+      gallery: ["/hero.png", "/bungalow.png", "/tiny-house.png"],
+    })),
+  }));
 }
 
 export async function getAllModels(): Promise<
@@ -59,7 +66,12 @@ export async function getAllModels(): Promise<
   );
   if (remote && remote.length > 0) return remote;
   return fallbackCategories.flatMap((c) =>
-    c.models.map((m) => ({ ...m, category: c }))
+    c.models.map((m) => ({
+      ...m,
+      image: "/bungalow.png",
+      gallery: ["/hero.png", "/bungalow.png", "/tiny-house.png"],
+      category: c,
+    }))
   );
 }
 
@@ -74,7 +86,13 @@ export async function getModelBySlug(
   if (remote) return remote;
   for (const cat of fallbackCategories) {
     const m = cat.models.find((x) => x.slug === slug);
-    if (m) return { ...m, category: cat };
+    if (m)
+      return {
+        ...m,
+        image: "/bungalow.png",
+        gallery: ["/hero.png", "/bungalow.png", "/tiny-house.png"],
+        category: cat,
+      };
   }
   return null;
 }
@@ -84,13 +102,14 @@ export async function getModelBySlug(
 export async function getAllPosts(): Promise<Post[]> {
   const remote = await sanityFetch<Post[]>(allPostsQuery, {}, ["post"]);
   if (remote && remote.length > 0) return remote;
-  return fallbackPosts;
+  return fallbackPosts.map((p) => ({ ...p, image: "/bungalow.png" }));
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
   const remote = await sanityFetch<Post>(postBySlugQuery, { slug }, ["post"]);
   if (remote) return remote;
-  return fallbackPosts.find((p) => p.slug === slug) ?? null;
+  const p = fallbackPosts.find((x) => x.slug === slug);
+  return p ? { ...p, image: "/bungalow.png" } : null;
 }
 
 // ---- TESTIMONIALS ----------------------------------------------------------
