@@ -22,17 +22,6 @@
   --font-serif: var(--font-serif);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #14100c;
-    --surface: #1c1712;
-    --foreground: #f4ebdd;
-    --muted: #a89989;
-    --accent: #c89469;
-    --accent-soft: #8a6240;
-    --border: #2a221a;
-  }
-}
 
 html {
   scroll-behavior: smooth;

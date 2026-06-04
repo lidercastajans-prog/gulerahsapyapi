@@ -8,17 +8,17 @@ export const site = {
   whatsappDefaultText:
     "Merhaba, ahşap yapı projeleriniz hakkında bilgi almak istiyorum.",
   email: "info@gulerahsapyapi.com",
-  address: "Adrasan Mh. Sağlık Ocağı Yanı, 07370 Kumluca / Antalya",
+  address: "Merkez Mahallesi Antalya Caddesi No:44 Adrasan / Kumluca / Antalya",
   addressParts: {
-    street: "Adrasan Mh. Sağlık Ocağı Yanı",
+    street: "Merkez Mahallesi Antalya Caddesi No:44",
     locality: "Kumluca",
     region: "Antalya",
     postalCode: "07370",
     country: "TR",
   },
-  mapsQuery: "Adrasan Mahallesi Sağlık Ocağı Kumluca Antalya",
+  mapsQuery: "Merkez Mahallesi Antalya Caddesi No:44 Adrasan Kumluca Antalya",
   mapsLink:
-    "https://www.google.com/maps/search/?api=1&query=Adrasan+Mahallesi+Sa%C4%9Fl%C4%B1k+Oca%C4%9F%C4%B1+Kumluca+Antalya",
+    "https://www.google.com/maps/search/?api=1&query=Merkez+Mahallesi+Antalya+Caddesi+No:44+Adrasan+Kumluca+Antalya",
   experienceYears: 30,
   region: "Adrasan & Antalya",
 };
