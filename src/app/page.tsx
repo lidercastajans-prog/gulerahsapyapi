@@ -60,7 +60,7 @@ function Hero() {
   return (
     <section
       id="anasayfa"
-      className="relative min-h-[88vh] flex items-end overflow-hidden"
+      className="relative min-h-[calc(100dvh-5rem)] flex items-end overflow-hidden"
     >
       <Image
         src={images.hero}

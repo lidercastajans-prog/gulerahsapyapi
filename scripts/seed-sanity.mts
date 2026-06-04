@@ -9,11 +9,10 @@
  *   2. `npm install` yapılmış olmalı
  *
  * Çalıştırma:
- *   node --env-file=.env.local scripts/seed-sanity.mjs
+ *   npx tsx --env-file=.env.local scripts/seed-sanity.mts
  *
- * Görseller: i0.wp.com'daki uzak URL'ler script tarafından indirilip Sanity assets'e yüklenir.
- *
- * Yeniden çalıştırılabilir: aynı slug'lar zaten varsa _id deterministik olduğu için update'ler.
+ * Strateji: createIfNotExists + patch — mevcut görseller korunur, eksikler eklenir.
+ * Yeniden çalıştırılabilir, idempotent.
  */
 
 import { createClient } from "@sanity/client";
@@ -47,35 +46,45 @@ const client = createClient({
   useCdn: false,
 });
 
-// --- TS modüllerini dinamik yükle (tsx ile çalıştırıldığında native) ---
 const { categories } = await import("../src/lib/models");
 const { posts } = await import("../src/lib/posts");
 const { testimonials } = await import("../src/lib/testimonials");
 const { faqGroups } = await import("../src/lib/faqs");
 const { glossary } = await import("../src/lib/glossary");
 const { processSteps } = await import("../src/lib/process");
-const { gallery: siteGallery } = await import("../src/lib/site");
 
-// --- Görsel yükleme ---
 const cacheDir = join(tmpdir(), "guler-seed-images");
 if (!existsSync(cacheDir)) mkdirSync(cacheDir, { recursive: true });
 
-const assetCache = new Map(); // url -> sanity asset ref
+type AssetRef = { _type: "image"; asset: { _type: "reference"; _ref: string }; alt?: string };
+const assetCache = new Map<string, AssetRef>();
 
-async function uploadImage(url, alt) {
-  if (assetCache.has(url)) return assetCache.get(url);
-  console.log(`  > image: ${url.slice(-60)}`);
-  const fileName = url.split("/").pop().split("?")[0];
+async function uploadImage(url: string, alt: string): Promise<AssetRef | null> {
+  // Yerel path veya placeholder URL'leri atla
+  if (!url || url.startsWith("/") || url.includes("dummy")) return null;
+
+  if (assetCache.has(url)) return assetCache.get(url)!;
+  console.log(`  > image: ${url.slice(-55)}`);
+
+  const fileName = url.split("/").pop()!.split("?")[0];
   const localPath = join(cacheDir, encodeURIComponent(fileName));
+
   if (!existsSync(localPath)) {
     const res = await fetch(url);
-    if (!res.ok) throw new Error(`fetch ${url}: ${res.status}`);
-    await pipeline(Readable.fromWeb(res.body), createWriteStream(localPath));
+    if (!res.ok || !res.body) {
+      console.warn(`  ! 403/hata: ${url.slice(-55)}`);
+      return null;
+    }
+    await pipeline(
+      Readable.fromWeb(res.body as Parameters<typeof Readable.fromWeb>[0]),
+      createWriteStream(localPath)
+    );
   }
+
   const asset = await client.assets.upload("image", createReadStream(localPath), {
     filename: fileName,
   });
-  const ref = {
+  const ref: AssetRef = {
     _type: "image",
     asset: { _type: "reference", _ref: asset._id },
     ...(alt ? { alt } : {}),
@@ -84,7 +93,7 @@ async function uploadImage(url, alt) {
   return ref;
 }
 
-const slugify = (s) =>
+const slugify = (s: string) =>
   s
     .toLocaleLowerCase("tr-TR")
     .replaceAll("ş", "s")
@@ -96,173 +105,168 @@ const slugify = (s) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 
-// --- Kategoriler ---
+// ---- Kategoriler ----
 console.log("Kategoriler...");
-const categoryRefs = {};
+const categoryRefs: Record<string, string> = {};
 for (let i = 0; i < categories.length; i++) {
   const c = categories[i];
   const _id = `category-${c.slug}`;
-  await client.createOrReplace({
-    _id,
-    _type: "category",
-    title: c.title,
-    slug: { _type: "slug", current: c.slug },
-    intro: c.intro,
-    order: i,
-  });
+  await client.createIfNotExists({ _id, _type: "category" });
+  await client
+    .patch(_id)
+    .set({ title: c.title, slug: { _type: "slug", current: c.slug }, intro: c.intro, order: i })
+    .commit();
   categoryRefs[c.slug] = _id;
 }
 
-// --- Modeller ---
+// ---- Modeller ----
 console.log("Modeller...");
-const modelRefs = {}; // slug -> _id
+const modelRefs: Record<string, string> = {};
 for (let ci = 0; ci < categories.length; ci++) {
   const cat = categories[ci];
   for (let mi = 0; mi < cat.models.length; mi++) {
     const m = cat.models[mi];
     const _id = `model-${m.slug}`;
     console.log(`  ${m.name}`);
+
+    // Belge yoksa oluştur
+    await client.createIfNotExists({ _id, _type: "model" });
+
+    // Metadata her zaman güncelle
+    await client
+      .patch(_id)
+      .set({
+        name: m.name,
+        slug: { _type: "slug", current: m.slug },
+        category: { _type: "reference", _ref: categoryRefs[cat.slug] },
+        area: m.area,
+        layout: m.layout,
+        bath: m.bath,
+        capacity: m.capacity,
+        levels: m.levels,
+        deliveryTime: m.deliveryTime,
+        highlight: m.highlight,
+        description: m.description,
+        longDescription: m.longDescription,
+        features: m.features,
+        includes: m.includes,
+        options: m.options,
+        order: mi,
+      })
+      .commit();
+
+    // Görseli sadece yüklenebildiyse güncelle (mevcut korunur)
     const image = await uploadImage(m.image, m.name);
-    const galleryRefs = [];
+    if (image) {
+      await client.patch(_id).set({ image }).commit();
+    } else {
+      // Mevcut görsel yoksa setIfMissing ile boş placeholder yaz (zorunlu değil)
+    }
+
+    // Galeri: başarıyla yüklenen görseller varsa güncelle
+    const galleryRefs: (AssetRef & { _key: string })[] = [];
     for (const g of m.gallery ?? []) {
       const r = await uploadImage(g, m.name);
-      galleryRefs.push({ ...r, _key: `g-${galleryRefs.length}` });
+      if (r) galleryRefs.push({ ...r, _key: `g-${galleryRefs.length}` });
     }
-    await client.createOrReplace({
-      _id,
-      _type: "model",
-      name: m.name,
-      slug: { _type: "slug", current: m.slug },
-      category: { _type: "reference", _ref: categoryRefs[cat.slug] },
-      area: m.area,
-      layout: m.layout,
-      bath: m.bath,
-      capacity: m.capacity,
-      levels: m.levels,
-      deliveryTime: m.deliveryTime,
-      highlight: m.highlight,
-      description: m.description,
-      longDescription: m.longDescription,
-      features: m.features,
-      includes: m.includes,
-      options: m.options,
-      image,
-      gallery: galleryRefs,
-      order: mi,
-    });
+    if (galleryRefs.length > 0) {
+      await client.patch(_id).set({ gallery: galleryRefs }).commit();
+    }
+
     modelRefs[m.slug] = _id;
   }
 }
 
-// --- Blog yazıları ---
+// ---- Blog yazıları ----
 console.log("Blog yazıları...");
 for (const p of posts) {
   const _id = `post-${p.slug}`;
   console.log(`  ${p.title}`);
+  await client.createIfNotExists({ _id, _type: "post" });
+  await client
+    .patch(_id)
+    .set({
+      title: p.title,
+      slug: { _type: "slug", current: p.slug },
+      excerpt: p.excerpt,
+      category: p.category,
+      date: p.date,
+      readTime: p.readTime,
+      body: p.body,
+    })
+    .commit();
   const image = await uploadImage(p.image, p.title);
-  await client.createOrReplace({
-    _id,
-    _type: "post",
-    title: p.title,
-    slug: { _type: "slug", current: p.slug },
-    excerpt: p.excerpt,
-    category: p.category,
-    date: p.date,
-    readTime: p.readTime,
-    image,
-    body: p.body,
-  });
+  if (image) await client.patch(_id).set({ image }).commit();
 }
 
-// --- Referanslar ---
+// ---- Referanslar ----
 console.log("Referanslar...");
 for (const t of testimonials) {
   const _id = `testimonial-${t.id}`;
-  await client.createOrReplace({
-    _id,
-    _type: "testimonial",
-    name: t.name,
-    city: t.city,
-    projectType: t.projectType,
-    ...(t.modelSlug && modelRefs[t.modelSlug]
-      ? {
-          model: {
-            _type: "reference",
-            _ref: modelRefs[t.modelSlug],
-          },
-        }
-      : {}),
-    rating: t.rating,
-    quote: t.quote,
-    date: t.date,
-    featured: t.featured ?? false,
-  });
+  await client.createIfNotExists({ _id, _type: "testimonial" });
+  await client
+    .patch(_id)
+    .set({
+      name: t.name,
+      city: t.city,
+      projectType: t.projectType,
+      ...(t.modelSlug && modelRefs[t.modelSlug]
+        ? { model: { _type: "reference", _ref: modelRefs[t.modelSlug] } }
+        : {}),
+      rating: t.rating,
+      quote: t.quote,
+      date: t.date,
+      featured: t.featured ?? false,
+    })
+    .commit();
 }
 
-// --- SSS ---
+// ---- SSS ----
 console.log("SSS grupları...");
 for (let i = 0; i < faqGroups.length; i++) {
   const g = faqGroups[i];
   const _id = `faq-${g.slug}`;
-  await client.createOrReplace({
-    _id,
-    _type: "faqGroup",
-    title: g.title,
-    slug: { _type: "slug", current: g.slug },
-    order: i,
-    items: g.items.map((it, idx) => ({
-      _type: "faq",
-      _key: `q-${idx}`,
-      q: it.q,
-      a: it.a,
-    })),
-  });
+  await client.createIfNotExists({ _id, _type: "faqGroup" });
+  await client
+    .patch(_id)
+    .set({
+      title: g.title,
+      slug: { _type: "slug", current: g.slug },
+      order: i,
+      items: g.items.map((it, idx) => ({ _type: "faq", _key: `q-${idx}`, q: it.q, a: it.a })),
+    })
+    .commit();
 }
 
-// --- Sözlük ---
+// ---- Sözlük ----
 console.log("Sözlük terimleri...");
 for (const t of glossary) {
   const _id = `term-${slugify(t.term)}`;
-  await client.createOrReplace({
-    _id,
-    _type: "term",
-    term: t.term,
-    definition: t.definition,
-    related: t.related ?? [],
-  });
+  await client.createIfNotExists({ _id, _type: "term" });
+  await client
+    .patch(_id)
+    .set({ term: t.term, definition: t.definition, related: t.related ?? [] })
+    .commit();
 }
 
-// --- Süreç adımları ---
+// ---- Süreç adımları ----
 console.log("Süreç adımları...");
 for (let i = 0; i < processSteps.length; i++) {
   const s = processSteps[i];
   const _id = `processStep-${s.number}`;
-  await client.createOrReplace({
-    _id,
-    _type: "processStep",
-    number: s.number,
-    title: s.title,
-    duration: s.duration,
-    description: s.description,
-    weCheck: s.weCheck,
-    weNeed: s.weNeed,
-    order: i,
-  });
-}
-
-// --- Anasayfa galerisi ---
-console.log("Galeri görselleri...");
-for (let i = 0; i < siteGallery.length; i++) {
-  const url = siteGallery[i];
-  const _id = `galleryImage-${i}`;
-  const image = await uploadImage(url, `Galeri ${i + 1}`);
-  await client.createOrReplace({
-    _id,
-    _type: "galleryImage",
-    image,
-    caption: `Tamamlanan projeden kare ${i + 1}`,
-    order: i,
-  });
+  await client.createIfNotExists({ _id, _type: "processStep" });
+  await client
+    .patch(_id)
+    .set({
+      number: s.number,
+      title: s.title,
+      duration: s.duration,
+      description: s.description,
+      weCheck: s.weCheck,
+      weNeed: s.weNeed,
+      order: i,
+    })
+    .commit();
 }
 
 console.log("\n✓ Tüm içerik Sanity'e yüklendi.");
